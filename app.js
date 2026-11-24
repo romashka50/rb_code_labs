@@ -101,10 +101,24 @@
     $("#solBtn").onclick = showSolution;
     updateHintBtn();
 
+    renderFun(entry);
     if (lv.type === "predict") renderPredict(); else renderEditor();
     renderStage(null);
     updateProgress();
     window.scrollTo({ top: 0 });
+  }
+
+  /* "Fun corner": facts, jokes and memes under the lesson (only if the level has some) */
+  function renderFun(entry) {
+    var box = $("#fun"), f = JSQ.fun && JSQ.fun[entry.lec.id] && JSQ.fun[entry.lec.id][entry.lv.id];
+    var items = f && (f[lang] || f.en);
+    if (!items || !items.length) { box.hidden = true; box.innerHTML = ""; return; }
+    box.innerHTML = "<h3>" + t("funTitle") + "</h3>" + items.map(function (it) {
+      return '<div class="fi ' + it.k + '"><span class="fk">' + t(it.k) + "</span><p>" + it.t + "</p>" +
+        (it.code ? '<pre class="ex">' + hl(it.code) + "</pre>" : "") +
+        (it.img ? '<img src="' + it.img + '" alt="" loading="lazy">' : "") + "</div>";
+    }).join("");
+    box.hidden = false;
   }
 
   function updateHintBtn() {

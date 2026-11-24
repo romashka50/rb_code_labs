@@ -3,6 +3,7 @@
   root.JSQ = root.JSQ || {};
   root.JSQ.ui = {
     en: {
+      funTitle: "😄 Fun corner", fact: "🤓 Fun fact", joke: "😂 Joke", meme: "🖼️ Meme",
       lecture: "Lecture {0}", level: "Level {0}/{1}", chooseLevel: "Choose a level", resetAll: "Reset my progress",
       resetConfirm: "Erase all your stars and progress in this browser?", watch: "▶ Watch the lecture",
       learn: "Learn", mission: "🎯 Your mission", prev: "← Previous", next: "Next →",
@@ -26,6 +27,7 @@
       eGeneric: "Bit got an error: <code>{0}</code>"
     },
     uk: {
+      funTitle: "😄 Куточок сміху", fact: "🤓 Цікавий факт", joke: "😂 Жарт", meme: "🖼️ Мем",
       lecture: "Лекція {0}", level: "Рівень {0}/{1}", chooseLevel: "Обери рівень", resetAll: "Скинути мій прогрес",
       resetConfirm: "Стерти всі зірки та прогрес у цьому браузері?", watch: "▶ Дивитись лекцію",
       learn: "Теорія", mission: "🎯 Твоя місія", prev: "← Назад", next: "Далі →",

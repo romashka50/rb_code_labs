@@ -157,3 +157,14 @@ dialog::backdrop{background:#0009}
 .menu-foot{padding:0 20px 16px;text-align:right}
 #confetti{position:fixed;inset:0;pointer-events:none;width:100%;height:100%;z-index:50}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* fun corner */
+.fun{margin-top:18px;border-color:color-mix(in srgb,var(--js) 45%,var(--line))}
+.fun h3{margin:0 0 8px;font-size:1rem}
+.fi{border-top:1px dashed var(--line);padding:10px 0}
+.fi:first-of-type{border-top:0}
+.fi p{margin:.3em 0}
+.fk{display:inline-block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#111;background:var(--js);border-radius:999px;padding:1px 10px}
+.fi.joke .fk{background:var(--ok)} .fi.meme .fk{background:#ff8fc5}
+.fi .ex{margin:.4em 0 0}
+.fi img{display:block;max-width:min(100%,340px);border-radius:10px;margin:.5em 0 0;border:1px solid var(--line)}
