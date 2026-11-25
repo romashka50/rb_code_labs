@@ -3,6 +3,7 @@
   root.JSQ = root.JSQ || {};
   root.JSQ.ui = {
     en: {
+      anyWay: "Any solution that reaches the goals is accepted: the checker looks at the results. Only a goal that names a keyword or syntax (let, const, backticks, comments…) requires you to use it.",
       funTitle: "😄 Fun corner", fact: "🤓 Fun fact", joke: "😂 Joke", meme: "🖼️ Meme",
       lecture: "Lecture {0}", level: "Level {0}/{1}", chooseLevel: "Choose a level", resetAll: "Reset my progress",
       resetConfirm: "Erase all your stars and progress in this browser?", watch: "▶ Watch the lecture",
@@ -27,6 +28,7 @@
       eGeneric: "Bit got an error: <code>{0}</code>"
     },
     uk: {
+      anyWay: "Підійде будь-яке рішення, що досягає цілей: перевіряються результати. Лише якщо ціль називає ключове слово чи синтаксис (let, const, зворотні лапки, коментарі…), його треба використати.",
       funTitle: "😄 Куточок сміху", fact: "🤓 Цікавий факт", joke: "😂 Жарт", meme: "🖼️ Мем",
       lecture: "Лекція {0}", level: "Рівень {0}/{1}", chooseLevel: "Обери рівень", resetAll: "Скинути мій прогрес",
       resetConfirm: "Стерти всі зірки та прогрес у цьому браузері?", watch: "▶ Дивитись лекцію",

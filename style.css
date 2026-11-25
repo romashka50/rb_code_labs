@@ -96,11 +96,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .goals li i{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:.8rem;margin-top:1px}
 .goals li.ok i{background:var(--ok);border-color:var(--ok);color:#06251a}
 .goals li.no i{border-color:var(--bad);color:var(--bad)}
-.win{position:absolute;inset:0;background:linear-gradient(rgba(11,14,28,.82),rgba(11,14,28,.9)),url(assets/intro-backdrop.jpg) center/cover;border-radius:16px;display:grid;place-content:center;text-align:center;gap:8px;padding:20px;animation:pop .35s ease}
+.win{position:fixed;z-index:40;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,92vw);max-height:90vh;overflow:auto;
+  background:linear-gradient(rgba(11,14,28,.86),rgba(11,14,28,.94)),url(assets/intro-backdrop.jpg) center/cover;border:1px solid var(--accent);border-radius:16px;
+  display:grid;gap:8px;text-align:center;padding:24px 20px;box-shadow:0 0 0 100vmax rgba(5,7,16,.62),0 24px 70px #000b;animation:pop .35s ease}
 .win h2{margin:0;font-size:1.6rem}
 .win .st{font-size:2rem;color:var(--js);letter-spacing:4px}
 .win .row{justify-content:center}
-@keyframes pop{from{opacity:0;transform:scale(.95)}}
+@keyframes pop{from{opacity:0;transform:translate(-50%,-47%)}}
 
 /* editor */
 .play{padding:0;overflow:hidden}
@@ -168,3 +170,6 @@ dialog::backdrop{background:#0009}
 .fi.joke .fk{background:var(--ok)} .fi.meme .fk{background:#ff8fc5}
 .fi .ex{margin:.4em 0 0}
 .fi img{display:block;max-width:min(100%,340px);border-radius:10px;margin:.5em 0 0;border:1px solid var(--line)}
+
+.anyway{margin:0;font-size:.8rem;color:var(--muted)}
+.anyway:empty{display:none}

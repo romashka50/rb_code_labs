@@ -29,8 +29,9 @@
 
   /* ───────── state (progress is saved in this browser only) ───────── */
   var STORE = "jsquest.v1";
-  var save = { done: {} };
+  var save = { done: {}, state: {} };
   try { save = JSON.parse(localStorage.getItem(STORE)) || save; } catch (e) {}
+  save.done = save.done || {}; save.state = save.state || {};
   function persist() { try { localStorage.setItem(STORE, JSON.stringify(save)); } catch (e) {} }
 
   var flat = [];   // every level with its lecture & chapter
@@ -40,9 +41,10 @@
     });
   });
   var cur = null;       // current entry in flat
-  var penalty = 0;      // stars lost on this level (hints, wrong guesses)
-  var hintsShown = 0;
-  var usedSolution = false;
+  // Per-level state that must survive switching language or leaving the level:
+  // hints used, stars lost, solution peeked, predict answers. Otherwise hints could be "refilled".
+  var st = null;
+  function levelState(key) { return save.state[key] || (save.state[key] = { h: 0, p: 0, s: false, a: {} }); }
 
   /* ───────── syntax highlighting (tiny tokenizer) ───────── */
   var KW = /^(const|let|var|if|else|for|while|do|switch|case|break|continue|function|return|typeof|new|of|in|class|try|catch|throw|async|await)$/;
@@ -74,7 +76,7 @@
   function firstUndone() { return flat.filter(function (e) { return !save.done[e.key]; })[0] || flat[0]; }
 
   function open(entry) {
-    cur = entry; cur.tv = tr(entry); penalty = 0; hintsShown = 0; usedSolution = false;
+    cur = entry; cur.tv = tr(entry); st = levelState(entry.key);
     if (location.hash !== "#" + entry.key) history.replaceState(null, "", "#" + entry.key);
     var lv = entry.lv, tv = entry.tv, idx = flat.indexOf(entry);
     $("#lecName").textContent = t("lecture", entry.lec.num);
@@ -99,8 +101,10 @@
     $("#nextBtn").onclick = function () { next && open(next); };
     $("#hintBtn").onclick = showHint;
     $("#solBtn").onclick = showSolution;
+    for (var hi = 0; hi < st.h; hi++) addHint(hi);   // hints already used stay visible (and cost is already paid)
     updateHintBtn();
 
+    $("#anyway").textContent = lv.type === "predict" ? "" : t("anyWay");
     renderFun(entry);
     if (lv.type === "predict") renderPredict(); else renderEditor();
     renderStage(null);
@@ -124,20 +128,23 @@
   function updateHintBtn() {
     var n = cur.tv.hints.length;
     if (!n) { $("#hintBtn").hidden = true; return; }
-    var left = n - hintsShown;
+    var left = n - st.h;
     $("#hintBtn").textContent = left ? t("hint", left) : t("noHints");
     $("#hintBtn").disabled = !left;
-    $("#solBtn").hidden = left > 0 || cur.lv.type === "predict";
+    $("#solBtn").hidden = left > 0 || st.s || cur.lv.type === "predict";
+  }
+  function addHint(i) {
+    var d = document.createElement("div"); d.className = "hint"; d.innerHTML = "💡 " + cur.tv.hints[i];
+    $("#hints").appendChild(d);
   }
   function showHint() {
-    var h = cur.tv.hints[hintsShown++];
-    var d = document.createElement("div"); d.className = "hint"; d.innerHTML = "💡 " + h;
-    $("#hints").appendChild(d);
-    penalty = Math.min(2, penalty + 1);
+    if (st.h >= cur.tv.hints.length) return;
+    addHint(st.h++);
+    st.p = Math.min(2, st.p + 1); persist();
     updateHintBtn();
   }
   function showSolution() {
-    usedSolution = true; penalty = 2;
+    st.s = true; st.p = 2; persist();
     setCode(cur.lv.solution);
     $("#solBtn").hidden = true;
     say(t("solMsg"));
@@ -258,33 +265,40 @@
         var b = document.createElement("button");
         b.textContent = o === "error" ? t("anError") : o;
         b.dataset.v = o;
-        b.onclick = function () { answer(q, box, b, o); };
+        b.onclick = function () { answer(q, qi, box, b, o, false); };
         opts.appendChild(b);
       });
       root.appendChild(box);
     });
-    function answer(q, box, btn, choice) {
+    function answer(q, qi, box, btn, choice, restoring) {
       Array.prototype.forEach.call($$(".opts button", box), function (x) { x.disabled = true; });
       JSQ.run("", q.code, []).then(function (r) {
         var actual = r.error ? "error" : r.logs[0] ? r.logs[0].text : "";
         var right = actual === choice;
-        if (!right) penalty = Math.min(2, penalty + 1);
+        if (!restoring) { st.a[qi] = choice; if (!right) st.p = Math.min(2, st.p + 1); persist(); }
         Array.prototype.forEach.call($$(".opts button", box), function (x) {
           if (x.dataset.v === actual) x.classList.add("right");
           else if (x === btn) x.classList.add("miss");
         });
         $(".res", box).innerHTML = (right ? t("correct") : t("wrong")) + t("itPrints") + '<span class="out">' + esc(actual) + "</span>. " + q.why;
+        answered++;
+        if (restoring) return;
         setBit(right ? "happy" : "sad");
         say(right ? t("yes") : t("ha"));
-        answered++;
         if (answered === lv.questions.length) setTimeout(win, 900);
       });
     }
+    // answers given earlier (before a language switch or leaving the level) are shown again, never re-asked
+    lv.questions.forEach(function (q, qi) {
+      if (st.a[qi] === undefined) return;
+      var box = root.children[qi];
+      answer(Object.assign({}, q, { why: cur.tv.why(qi) }), qi, box, $('button[data-v="' + st.a[qi] + '"]', box), st.a[qi], true);
+    });
   }
   function $$(s, el) { return (el || document).querySelectorAll(s); }
 
   /* ───────── win ───────── */
-  function stars() { return usedSolution ? 1 : Math.max(1, 3 - penalty); }
+  function stars() { return st.s ? 1 : Math.max(1, 3 - st.p); }
   function win() {
     var s = stars(), prevStars = save.done[cur.key] || 0;
     if (s > prevStars) save.done[cur.key] = s; persist();
@@ -358,7 +372,7 @@
   $("#menuBtn").onclick = openMenu;
   $("#brand").onclick = function (e) { e.preventDefault(); open(firstUndone()); };
   $("#resetAll").onclick = function () {
-    if (confirm(t("resetConfirm"))) { save = { done: {} }; persist(); updateProgress(); $("#menu").close(); open(flat[0]); }
+    if (confirm(t("resetConfirm"))) { save = { done: {}, state: {} }; persist(); updateProgress(); $("#menu").close(); open(flat[0]); }
   };
   function applyStatic() {
     document.documentElement.lang = lang;
@@ -373,6 +387,7 @@
   applyStatic();
   var vurl = lectures[0] && lectures[0].videoUrl;
   if (vurl) { $("#videoLink").href = vurl; $("#videoLink").hidden = false; }
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("#win").hidden) $("#win").hidden = true; });
   window.addEventListener("hashchange", function () { var e = entryFromHash(); if (e && e !== cur) open(e); });
   open(entryFromHash() || firstUndone());
 })();

@@ -33,6 +33,9 @@ for (const lec of lectures) for (const ch of lec.chapters) for (const lv of ch.l
   if (s.error) bad("solution errors: " + s.error.message);
   lv.goals.forEach((g) => { if (!g.test(s)) bad(`solution fails goal: ${g.text}`); });
   if (pass(run(lv.starter))) bad("STARTER ALREADY PASSES");
+  // both quote styles must be accepted: the same solution with "double" quotes instead of 'single'
+  const dbl = lv.solution.replace(/'([^'"\n]*)'/g, '"$1"');
+  if (dbl !== lv.solution && !pass(run(dbl))) bad("solution with double quotes is not accepted");
   if (!lv.hints || !lv.hints.length) bad("no hints");
 }
 console.log(fail ? `\n${fail} problem(s) in ${n} levels` : `\nAll ${n} levels OK`);

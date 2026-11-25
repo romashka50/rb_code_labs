@@ -7,6 +7,7 @@ Static site, no build step, no dependencies. Open `index.html` or host the folde
 - `i18n.js`: interface strings in English and Ukrainian
 - `engine.js`: runs the learner's code in a Web Worker (2 s timeout, so endless loops can't freeze the page)
 - `app.js`, `style.css`, `index.html`: the interface
+- `test/alternatives.mjs`: `node test/alternatives.mjs` runs ~140 different valid solutions (must pass) and wrong ones (must fail). Add a case here whenever you add or change a level
 - `test/verify.mjs`: `node test/verify.mjs` checks that every solution passes, every starter fails, and every "predict" answer is what JavaScript really prints
 
 ## Link from a video

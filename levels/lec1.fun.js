@@ -88,31 +88,31 @@
     },
     "types-1": {
       en: [
-        { k: "joke", t: "The number <code>5</code> asks the string <code>\"5\"</code> out on a date. The string says: “Sorry, you're not my <b>type</b>.”" },
+        { k: "joke", t: "The number <code>5</code> asks the string <code>'5'</code> out on a date. The string says: “Sorry, you're not my <b>type</b>.”" },
         { k: "fact", t: "JavaScript has just <b>one</b> kind of number (a 64-bit decimal-capable one). There is no separate “integer” type: <code>3 === 3.0</code> is <code>true</code>." }
       ],
       uk: [
-        { k: "joke", t: "Число <code>5</code> запрошує рядок <code>\"5\"</code> на побачення. Рядок відповідає: «Вибач, ти не мій <b>тип</b>».", },
+        { k: "joke", t: "Число <code>5</code> запрошує рядок <code>'5'</code> на побачення. Рядок відповідає: «Вибач, ти не мій <b>тип</b>».", },
         { k: "fact", t: "У JavaScript лише <b>один</b> вид чисел (64-бітне число з плаваючою комою). Окремого типу «ціле» немає: <code>3 === 3.0</code> — це <code>true</code>." }
       ]
     },
     "types-2": {
       en: [
-        { k: "fact", t: "<code>Symbol(\"id\") === Symbol(\"id\")</code> is <code>false</code>. Two symbols with the same description are still different, like twins with the same name." },
+        { k: "fact", t: "<code>Symbol('id') === Symbol('id')</code> is <code>false</code>. Two symbols with the same description are still different, like twins with the same name." },
         { k: "fact", t: "Tony Hoare, who invented the null reference in 1965, later called it his “billion-dollar mistake”, because of all the crashes it caused over the decades." }
       ],
       uk: [
-        { k: "fact", t: "<code>Symbol(\"id\") === Symbol(\"id\")</code> — це <code>false</code>. Два символи з однаковим описом усе одно різні, як близнюки з однаковим іменем." },
+        { k: "fact", t: "<code>Symbol('id') === Symbol('id')</code> — це <code>false</code>. Два символи з однаковим описом усе одно різні, як близнюки з однаковим іменем." },
         { k: "fact", t: "Тоні Гоар, який винайшов null-посилання 1965 року, пізніше назвав це своєю «помилкою на мільярд доларів» через усі збої, які воно спричинило за десятиліття." }
       ]
     },
     "typeof-null": {
       en: [
-        { k: "meme", t: "JavaScript, 1995 to today:", code: $("typeof null   // \"object\"", "// “It's not a bug, it's a… okay, it's a bug.”") },
+        { k: "meme", t: "JavaScript, 1995 to today:", code: $("typeof null   // 'object'", "// “It's not a bug, it's a… okay, it's a bug.”") },
         { k: "fact", t: "Why? In the very first JS engine, values carried a small type tag, and objects had tag <code>0</code>. <code>null</code> was the “null pointer”, all zeros, so it looked like an object. A fix was proposed in 2013 but rejected: too many websites already relied on the bug." }
       ],
       uk: [
-        { k: "meme", t: "JavaScript, з 1995 року й донині:", code: $("typeof null   // \"object\"", "// «Це не баг, це… гаразд, це баг.»") },
+        { k: "meme", t: "JavaScript, з 1995 року й донині:", code: $("typeof null   // 'object'", "// «Це не баг, це… гаразд, це баг.»") },
         { k: "fact", t: "Чому так? У найпершому рушії JS значення мали маленьку мітку типу, а в об'єктів вона була <code>0</code>. <code>null</code> — це «нульовий вказівник», самі нулі, тож він виглядав як об'єкт. Виправлення пропонували 2013 року, але відхилили: забагато сайтів уже залежали від цього бага." }
       ]
     },
@@ -128,12 +128,12 @@
     },
     parse: {
       en: [
-        { k: "meme", t: "A classic JavaScript surprise. You'd expect <code>[1, 2, 3]</code>, right?", code: $("[\"1\", \"2\", \"3\"].map(parseInt)", "// [1, NaN, NaN]") },
-        { k: "fact", t: "<code>map</code> passes <b>two</b> arguments to the function: the item and its index. So <code>parseInt(\"2\", 1)</code> means “base 1”, which doesn't exist. The fix: <code>.map(Number)</code>." }
+        { k: "meme", t: "A classic JavaScript surprise. You'd expect <code>[1, 2, 3]</code>, right?", code: $("['1', '2', '3'].map(parseInt)", "// [1, NaN, NaN]") },
+        { k: "fact", t: "<code>map</code> passes <b>two</b> arguments to the function: the item and its index. So <code>parseInt('2', 1)</code> means “base 1”, which doesn't exist. The fix: <code>.map(Number)</code>." }
       ],
       uk: [
-        { k: "meme", t: "Класичний сюрприз JavaScript. Ти б очікував <code>[1, 2, 3]</code>, так?", code: $("[\"1\", \"2\", \"3\"].map(parseInt)", "// [1, NaN, NaN]") },
-        { k: "fact", t: "<code>map</code> передає функції <b>два</b> аргументи: елемент і його індекс. Тож <code>parseInt(\"2\", 1)</code> означає «система числення з основою 1», якої не існує. Виправлення: <code>.map(Number)</code>." }
+        { k: "meme", t: "Класичний сюрприз JavaScript. Ти б очікував <code>[1, 2, 3]</code>, так?", code: $("['1', '2', '3'].map(parseInt)", "// [1, NaN, NaN]") },
+        { k: "fact", t: "<code>map</code> передає функції <b>два</b> аргументи: елемент і його індекс. Тож <code>parseInt('2', 1)</code> означає «система числення з основою 1», якої не існує. Виправлення: <code>.map(Number)</code>." }
       ]
     },
     nan: {
@@ -149,11 +149,11 @@
     bases: {
       en: [
         { k: "joke", t: "There are 10 types of people in the world: those who understand binary, and those who don't." },
-        { k: "fact", t: "Hex can spell words! <code>parseInt(\"cafe\", 16)</code> is <code>51966</code>, and <code>parseInt(\"deadbeef\", 16)</code> is <code>3735928559</code>. Programmers have used “DEADBEEF” as a recognisable marker value for decades." }
+        { k: "fact", t: "Hex can spell words! <code>parseInt('cafe', 16)</code> is <code>51966</code>, and <code>parseInt('deadbeef', 16)</code> is <code>3735928559</code>. Programmers have used “DEADBEEF” as a recognisable marker value for decades." }
       ],
       uk: [
         { k: "joke", t: "У світі існує 10 типів людей: ті, хто розуміє двійкову систему, і ті, хто ні." },
-        { k: "fact", t: "Шістнадцяткою можна писати слова! <code>parseInt(\"cafe\", 16)</code> — це <code>51966</code>, а <code>parseInt(\"deadbeef\", 16)</code> — <code>3735928559</code>. Програмісти десятиліттями використовують «DEADBEEF» як впізнаване маркерне значення." }
+        { k: "fact", t: "Шістнадцяткою можна писати слова! <code>parseInt('cafe', 16)</code> — це <code>51966</code>, а <code>parseInt('deadbeef', 16)</code> — <code>3735928559</code>. Програмісти десятиліттями використовують «DEADBEEF» як впізнаване маркерне значення." }
       ]
     },
     bigint: {
@@ -169,20 +169,20 @@
     template: {
       en: [
         { k: "fact", t: "The name in this level isn't random. Ada Lovelace wrote what is considered the first published computer program in 1843, for a machine (Babbage's Analytical Engine) that was never finished." },
-        { k: "joke", t: "Before backticks: <code>\"Hello, \" + name + \"! You are \" + age</code>, and I forgot a space every single time." }
+        { k: "joke", t: "Before backticks: <code>'Hello, ' + name + '! You are ' + age</code>, and I forgot a space every single time." }
       ],
       uk: [
         { k: "fact", t: "Ім'я в цьому рівні невипадкове. Ада Лавлейс 1843 року написала те, що вважають першою опублікованою комп'ютерною програмою, для машини (аналітичної машини Беббіджа), яку так і не добудували." },
-        { k: "joke", t: "До зворотних лапок: <code>\"Hello, \" + name + \"! You are \" + age</code>, і кожного разу я забував пробіл." }
+        { k: "joke", t: "До зворотних лапок: <code>'Hello, ' + name + '! You are ' + age</code>, і кожного разу я забував пробіл." }
       ]
     },
     methods: {
       en: [
-        { k: "fact", t: "In 2016 a tiny npm package called <b>left-pad</b> (just 11 lines, it adds characters to the left of a string) was removed by its author, and builds of huge projects like React and Babel broke around the world. Today the same thing is built in: <code>\"5\".padStart(3, \"0\")</code> gives <code>\"005\"</code>." },
+        { k: "fact", t: "In 2016 a tiny npm package called <b>left-pad</b> (just 11 lines, it adds characters to the left of a string) was removed by its author, and builds of huge projects like React and Babel broke around the world. Today the same thing is built in: <code>'5'.padStart(3, '0')</code> gives <code>'005'</code>." },
         { k: "joke", t: "<code>toUpperCase()</code>: the keyboard-friendly way to yell at your users." }
       ],
       uk: [
-        { k: "fact", t: "2016 року крихітний npm-пакет <b>left-pad</b> (усього 11 рядків, він додає символи ліворуч від рядка) видалив його автор, і збірки величезних проєктів, як-от React і Babel, зламались по всьому світу. Сьогодні це вбудовано в мову: <code>\"5\".padStart(3, \"0\")</code> дає <code>\"005\"</code>." },
+        { k: "fact", t: "2016 року крихітний npm-пакет <b>left-pad</b> (усього 11 рядків, він додає символи ліворуч від рядка) видалив його автор, і збірки величезних проєктів, як-от React і Babel, зламались по всьому світу. Сьогодні це вбудовано в мову: <code>'5'.padStart(3, '0')</code> дає <code>'005'</code>." },
         { k: "joke", t: "<code>toUpperCase()</code> — зручний для клавіатури спосіб накричати на своїх користувачів." }
       ]
     },
@@ -196,11 +196,11 @@
     },
     convert: {
       en: [
-        { k: "meme", t: "“Math” in JavaScript:", code: $("9 + \"1\"      // \"91\"", "9 + \"1\" - 1  // 90", "// Both answers are correct. Somehow.") },
+        { k: "meme", t: "“Math” in JavaScript:", code: $("9 + '1'      // '91'", "9 + '1' - 1  // 90", "// Both answers are correct. Somehow.") },
         { k: "joke", t: "JavaScript: <code>+</code> adds numbers and glues strings, and it decides which one by looking at your mood." }
       ],
       uk: [
-        { k: "meme", t: "«Математика» в JavaScript:", code: $("9 + \"1\"      // \"91\"", "9 + \"1\" - 1  // 90", "// Обидві відповіді правильні. Якось.") },
+        { k: "meme", t: "«Математика» в JavaScript:", code: $("9 + '1'      // '91'", "9 + '1' - 1  // 90", "// Обидві відповіді правильні. Якось.") },
         { k: "joke", t: "JavaScript: <code>+</code> додає числа й склеює рядки, а що саме робити, вирішує за твоїм настроєм." }
       ]
     },
@@ -215,11 +215,11 @@
     "predict-falsy": {
       en: [
         { k: "joke", t: "A programmer's partner says: “Go to the store and buy a loaf of bread. If they have eggs, buy 12.” The programmer comes back with 12 loaves. “They had eggs.”" },
-        { k: "fact", t: "The string <code>\"false\"</code> is truthy. Yes, really. This has caused real bugs when programs read settings from text files." }
+        { k: "fact", t: "The string <code>'false'</code> is truthy. Yes, really. This has caused real bugs when programs read settings from text files." }
       ],
       uk: [
         { k: "joke", t: "Дружина каже програмістові: «Сходи в магазин і купи буханку хліба. Якщо будуть яйця, візьми 12». Програміст повертається з 12 буханками. «Там були яйця».", },
-        { k: "fact", t: "Рядок <code>\"false\"</code> — truthy. Так, справді. Через це траплялись реальні баги, коли програми читали налаштування з текстових файлів." }
+        { k: "fact", t: "Рядок <code>'false'</code> — truthy. Так, справді. Через це траплялись реальні баги, коли програми читали налаштування з текстових файлів." }
       ]
     },
     "predict-equality": {
